@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>Auditorias - {% block titulo %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap-theme.min.css">
+  {% block style_css %}{% endblock %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+</head>
+<div class="container">
+<body>
+  <header>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			      <span class="sr-only">Desplegar navegación</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+    		 </button>
+		    <a class="navbar-brand" href="{% url 'index' %}"><span class="glyphicon glyphicon-align-justify"></span></a>
+ 		</div>
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			          Preguntas <b class="caret"></b>
+			        </a>
+			        <ul class="dropdown-menu">
+			          <li><a href="{% url 'questions' %}">Lista de Preguntas</a></li>
+			          <li><a href="{% url 'question_create' %}">Crear Pregunta</a></li>
+			        </ul>
+			      </li>
+			       <li><a href="{% url 'create' %}">Crear calendario</a></li>
+			      <li><a href="{% url 'documents' %}">Documentos</a></li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+		    	{% if user.is_authenticated %}
+		    	<li><p class="navbar-text">Bienvenido {{user.username}}</p></li>
+		    	<li><a href="{% url 'logout' %}">Cerrar Sesion</a>
+		    	{% else %}
+		    	<li><a href="{% url 'login' %}">Autenticarse</a></li>
+		    	<li><a href="{% url 'signin' %}">Registrarse</a></li>
+		    	{% endif %}
+		    </ul>
+		</div>
+	</nav>
+	
+	<div class="page-header">
+		<h1>{% block encabezado %}{% endblock %}</h1>
+	</div>
+  </header>	
+	{% block contenido %}{% endblock %}
+	<br>
+  <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Bienvenido a Auditorías</p>
+      </div>
+    </footer>
+</body>
+</div>
+</html>

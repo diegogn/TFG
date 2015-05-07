@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block titulo %} Preguntas {% endblock %}
+
+{% block encabezado %} Lista de Preguntas {% endblock %}
+
+{% block contenido %}
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <tr><td><strong>Preguntas</strong></td></tr>
+  {% for pregunta in preguntas %}
+  <tr><td>{{pregunta}}</td><td>{% if user.id == pregunta.user.id %}<a href="{% url 'details' pregunta.id %}">Detalles</a></td>{% endif %}</tr>
+  {% endfor %}
+</table>
+</div>
+
+{% endblock %}

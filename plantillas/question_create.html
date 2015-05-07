@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block titulo %} Crear Pregunta {% endblock %}
+
+{% block encabezado %} Crear Pregunta {% endblock %}
+
+{% block contenido %}
+
+<form method="post" action=''>
+{% csrf_token %}
+   <label for="pregunta">{{ form.pregunta.label_tag }}</label>
+    <div id="pregunta">{{ form.pregunta }} <span class='help-block'>{{form.pregunta.help_text}}</span></div>
+    {% if form.pregunta.errors %}
+    <div class="alert alert-danger"><strong>{{form.pregunta.errors|escape}}</strong></div>
+    {% endif %}
+	<br>
+    <label for="audit">{{ form.audit.label_tag }}</label>
+    <div id="audit">{{ form.audit }}</div>
+    {% if form.audit.errors %}
+    <br>
+    <div class="alert alert-danger"><strong>{{form.audit.errors|escape}}</strong></div>
+    {% endif %}
+	<br>
+<input type="submit" value="Crear Pregunta"/>
+</form>
+
+{% endblock %}

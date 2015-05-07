@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block titulo %} Detalle de pregunta {% endblock %}
+
+{% block encabezado %} Detalles {% endblock %}
+
+{% block contenido %}
+
+<p>
+<label for="pregunta">Pregunta:</label>
+{{ pregunta.pregunta }}<br>
+
+<label for="auditoria">Auditoria:</label>
+{{ pregunta.audit.nombre }}
+<br><br>
+<a href="{% url 'questions' %}"><button type="button" class="btn btn-default">Volver</button></a>
+
+</p>
+
+{% endblock %}
