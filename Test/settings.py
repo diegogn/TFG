@@ -37,7 +37,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # Application definition
 
 INSTALLED_APPS = (
-    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,9 +100,4 @@ STATICFILES_DIRS = (
 )
 
 CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), '..', 'client_secrets.json')
-
-FLOW = flow_from_clientsecrets(
-    CLIENT_SECRETS,
-    scope='https://www.googleapis.com/auth/calendar',
-    redirect_uri='http://localhost:8000/api/oauth2callback')
 
