@@ -16,7 +16,7 @@ CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), '..', 'client_secrets.j
 FLOW = flow_from_clientsecrets(
     CLIENT_SECRETS,
     scope='https://www.googleapis.com/auth/calendar',
-    redirect_uri='http://localhost:8000/api/oauth2callback')
+    redirect_uri='http://localhost:8000/api/oauth2callback/')
 
 
 # Create your views here.
@@ -39,7 +39,8 @@ def create(request):
                         'summary': form.cleaned_data['nombre'],
                         'timeZone': form.cleaned_data['zona_horaria'],
             }
-            
+
+
             created_calendar = service.calendars().insert(body=calendar).execute()
             return render(request, 'welcome2.html', {'created_calendar': created_calendar})         
     else:
@@ -49,9 +50,9 @@ def create(request):
 
 @login_required
 def auth_return(request):
-    if not xsrfutil.validate_token(settings.SECRET_KEY, str(request.REQUEST['state']), request.user):
+    if not xsrfutil.validate_token(settings.SECRET_KEY, str(request.GET.get('state')), request.user):
         return HttpResponseBadRequest()
-    credential = FLOW.step2_exchange(request.REQUEST['code'])
+    credential = FLOW.step2_exchange(request.GET.get('code'))
     storage = Storage(CredentialsModel, 'id', request.user, 'credential')
     storage.put(credential)
     return HttpResponseRedirect("/api/create")

@@ -14,7 +14,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^documents/$', 'Audits.views.documents', name='documents'),
     url(r'^api/', include('api.urls')),
-)
+    url(r'^soc/', include("social.apps.django_app.urls", namespace="social"))
+    )
 
 if settings.DEBUG:
     # static files (images, css, javascript, etc.)

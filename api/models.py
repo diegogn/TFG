@@ -12,5 +12,9 @@ class CredentialsModel(models.Model):
     id = models.ForeignKey(User, primary_key=True)
     credential = CredentialsField()
 
+
 class CredentialsAdmin(admin.ModelAdmin):
     pass
+
+class Test(models.Model):
+    nombre = models.TextField()
